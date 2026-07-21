@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 夫妻人生旅程 Wedding Edition</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="background-hearts"></div>
+
+<header class="topBar">
+
+    <div class="titleArea">
+
+        <h1>💕 夫妻人生旅程 💕</h1>
+
+        <div class="subtitle">
+            Wedding Board Game
+        </div>
+
+    </div>
+
+    <div id="turnPanel">
+
+        <div class="label">
+            目前隊伍
+        </div>
+
+        <div id="currentTeam">
+            第一隊
+        </div>
+
+    </div>
+
+</header>
+
+<main>
+
+<section id="boardSection">
+
+<div id="boardContainer">
+
+<svg id="roadLayer"></svg>
+
+<div id="board">
+
+<!-- 格子由JS建立 -->
+
+</div>
+
+<div id="pieceLayer">
+
+<div class="piece red" id="piece0"></div>
+<div class="piece blue" id="piece1"></div>
+<div class="piece green" id="piece2"></div>
+<div class="piece yellow" id="piece3"></div>
+<div class="piece purple" id="piece4"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<aside id="rightPanel">
+
+<div class="card teamCard">
+
+<h2>
+隊伍設定
+</h2>
+
+<div class="teamInput">
+
+<span class="dot red"></span>
+
+<input
+id="team0"
+type="text"
+value="第一隊">
+
+</div>
+
+<div class="teamInput">
+
+<span class="dot blue"></span>
+
+<input
+id="team1"
+type="text"
+value="第二隊">
+
+</div>
+
+<div class="teamInput">
+
+<span class="dot green"></span>
+
+<input
+id="team2"
+type="text"
+value="第三隊">
+
+</div>
+
+<div class="teamInput">
+
+<span class="dot yellow"></span>
+
+<input
+id="team3"
+type="text"
+value="第四隊">
+
+</div>
+
+<div class="teamInput">
+
+<span class="dot purple"></span>
+
+<input
+id="team4"
+type="text"
+value="第五隊">
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>
+🎲 骰子
+</h2>
+
+<div id="dice">
+
+1
+
+</div>
+
+<button id="rollBtn">
+
+🎲 擲骰
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>
+
+💕 題目
+
+</h2>
+
+<div id="questionBox">
+
+按下擲骰開始遊戲
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>
+
+🏆 計分
+
+</h2>
+
+<div id="scoreBoard">
+
+<div class="scoreRow">
+
+<span id="scoreName0">
+
+第一隊
+
+</span>
+
+<span id="score0">
+
+0
+
+</span>
+
+</div>
+
+<div class="scoreRow">
+
+<span id="scoreName1">
+
+第二隊
+
+</span>
+
+<span id="score1">
+
+0
+
+</span>
+
+</div>
+
+<div class="scoreRow">
+
+<span id="scoreName2">
+
+第三隊
+
+</span>
+
+<span id="score2">
+
+0
+
+</span>
+
+</div>
+
+<div class="scoreRow">
+
+<span id="scoreName3">
+
+第四隊
+
+</span>
+
+<span id="score3">
+
+0
+
+</span>
+
+</div>
+
+<div class="scoreRow">
+
+<span id="scoreName4">
+
+第五隊
+
+</span>
+
+<span id="score4">
+
+0
+
+</span>
+
+</div>
+
+</div>
+
+<button id="countdownBtn">
+
+⏱ 開始作答
+
+</button>
+
+<button id="nextBtn">
+
+➡ 下一隊
+
+</button>
+
+</div>
+
+</aside>
+
+</main>
+
+<div id="countdownOverlay">
+
+<div id="countdownNumber">
+
+10
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

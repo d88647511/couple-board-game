@@ -1,0 +1,887 @@
+/* ==============================
+   夫妻人生旅程 Wedding Edition
+   style.css
+============================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:"Noto Sans TC",sans-serif;
+    background:#f8d7e6;
+}
+
+/* =========================
+   粉色愛情背景
+========================= */
+
+body{
+
+background:
+radial-gradient(circle at 20% 20%,rgba(255,255,255,.65),transparent 28%),
+radial-gradient(circle at 80% 15%,rgba(255,255,255,.55),transparent 25%),
+radial-gradient(circle at 30% 80%,rgba(255,255,255,.45),transparent 25%),
+linear-gradient(180deg,#ffeaf4,#ffd9ea,#ffcfe5);
+
+position:relative;
+
+}
+
+#background-hearts{
+
+position:fixed;
+
+left:0;
+top:0;
+right:0;
+bottom:0;
+
+pointer-events:none;
+
+opacity:.18;
+
+background-image:
+
+radial-gradient(circle,#ffffff 2px,transparent 2px),
+
+radial-gradient(circle,#ffffff 1px,transparent 1px);
+
+background-size:
+
+140px 140px,
+70px 70px;
+
+}
+
+/* =========================
+   上方資訊列
+========================= */
+
+.topBar{
+
+height:95px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:18px 40px;
+
+background:rgba(255,255,255,.65);
+
+backdrop-filter:blur(10px);
+
+box-shadow:
+
+0 8px 20px rgba(0,0,0,.08);
+
+border-bottom:
+
+2px solid rgba(255,255,255,.7);
+
+}
+
+.titleArea h1{
+
+font-size:40px;
+
+font-weight:900;
+
+color:#d94f8c;
+
+letter-spacing:2px;
+
+}
+
+.subtitle{
+
+margin-top:4px;
+
+color:#888;
+
+font-size:16px;
+
+font-weight:600;
+
+}
+
+#turnPanel{
+
+padding:16px 30px;
+
+border-radius:20px;
+
+background:white;
+
+box-shadow:
+
+0 8px 20px rgba(0,0,0,.08);
+
+text-align:center;
+
+min-width:220px;
+
+}
+
+.label{
+
+font-size:16px;
+
+color:#999;
+
+margin-bottom:6px;
+
+}
+
+#currentTeam{
+
+font-size:28px;
+
+font-weight:900;
+
+color:#e53980;
+
+}
+
+/* =========================
+   主畫面
+========================= */
+
+main{
+
+display:flex;
+
+height:calc(100vh - 95px);
+
+}
+
+#boardSection{
+
+flex:1;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+position:relative;
+
+}
+#boardContainer{
+
+position:relative;
+
+width:1100px;
+
+height:760px;
+
+transform-origin:center center;
+
+transition:.3s;
+
+}
+
+#board{
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:1100px;
+
+height:760px;
+
+}
+
+/* =========================
+   道路 SVG
+========================= */
+
+#roadLayer{
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:1100px;
+
+height:760px;
+
+pointer-events:none;
+
+z-index:1;
+
+}
+
+#roadLayer path{
+
+stroke:#e8bf53;
+
+stroke-width:12;
+
+fill:none;
+
+stroke-linecap:round;
+
+stroke-linejoin:round;
+
+filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));
+
+}
+
+/* =========================
+   格子
+========================= */
+
+.space{
+
+position:absolute;
+
+width:82px;
+
+height:82px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:34px;
+
+font-weight:bold;
+
+background:white;
+
+border:5px solid #ffd3e6;
+
+box-shadow:
+
+0 10px 18px rgba(0,0,0,.15);
+
+transition:.25s;
+
+z-index:2;
+
+}
+
+.space:hover{
+
+transform:scale(1.08);
+
+}
+
+.space.start{
+
+background:#ffe27a;
+
+}
+
+.space.goal{
+
+background:#ffe08d;
+
+border-color:#ffb300;
+
+}
+
+.space.love{
+
+background:#ffd6e8;
+
+}
+
+.space.memory{
+
+background:#dff3ff;
+
+}
+
+.space.challenge{
+
+background:#fff4b9;
+
+}
+
+.space.surprise{
+
+background:#ead8ff;
+
+}
+
+.space.fun{
+
+background:#fff6d7;
+
+}
+
+/* =========================
+   棋子
+========================= */
+
+#pieceLayer{
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:1100px;
+
+height:760px;
+
+pointer-events:none;
+
+z-index:10;
+
+}
+
+.piece{
+
+position:absolute;
+
+width:28px;
+
+height:28px;
+
+border-radius:50%;
+
+border:3px solid white;
+
+box-shadow:
+
+0 5px 10px rgba(0,0,0,.3);
+
+transition:
+
+left .45s linear,
+top .45s linear;
+
+}
+
+.red{
+
+background:#ff4d4f;
+
+}
+
+.blue{
+
+background:#2f80ed;
+
+}
+
+.green{
+
+background:#2ecc71;
+
+}
+
+.yellow{
+
+background:#ffd43b;
+
+}
+
+.purple{
+
+background:#9b59b6;
+
+}
+
+@keyframes bounce{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+35%{
+
+transform:translateY(-18px);
+
+}
+
+70%{
+
+transform:translateY(0);
+
+}
+
+100%{
+
+transform:translateY(-4px);
+
+}
+
+}
+
+.piece.jump{
+
+animation:bounce .45s;
+
+}
+/* =========================
+   右側控制面板
+========================= */
+
+#rightPanel{
+
+width:420px;
+
+padding:24px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+background:rgba(255,255,255,.35);
+
+backdrop-filter:blur(12px);
+
+border-left:2px solid rgba(255,255,255,.5);
+
+overflow-y:auto;
+
+}
+
+.card{
+
+background:white;
+
+border-radius:22px;
+
+padding:22px;
+
+box-shadow:
+
+0 10px 22px rgba(0,0,0,.12);
+
+}
+
+.card h2{
+
+font-size:26px;
+
+margin-bottom:18px;
+
+color:#d84c8d;
+
+}
+
+/* =========================
+   隊伍輸入
+========================= */
+
+.teamInput{
+
+display:flex;
+
+align-items:center;
+
+margin-bottom:14px;
+
+gap:14px;
+
+}
+
+.teamInput input{
+
+flex:1;
+
+padding:12px 16px;
+
+font-size:20px;
+
+border-radius:12px;
+
+border:2px solid #ffd4e8;
+
+outline:none;
+
+transition:.2s;
+
+}
+
+.teamInput input:focus{
+
+border-color:#ff7db4;
+
+box-shadow:0 0 8px rgba(255,105,180,.25);
+
+}
+
+.dot{
+
+width:22px;
+
+height:22px;
+
+border-radius:50%;
+
+display:block;
+
+flex-shrink:0;
+
+}
+
+.dot.red{background:#ff4d4f;}
+.dot.blue{background:#2f80ed;}
+.dot.green{background:#2ecc71;}
+.dot.yellow{background:#ffd43b;}
+.dot.purple{background:#9b59b6;}
+
+/* =========================
+   骰子
+========================= */
+
+#dice{
+
+width:120px;
+
+height:120px;
+
+margin:12px auto 20px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:58px;
+
+font-weight:900;
+
+background:white;
+
+border-radius:24px;
+
+border:6px solid #ffd2e4;
+
+box-shadow:
+
+0 10px 18px rgba(0,0,0,.15);
+
+}
+
+@keyframes diceRoll{
+
+0%{transform:rotate(0deg) scale(1);}
+20%{transform:rotate(90deg) scale(1.12);}
+40%{transform:rotate(180deg) scale(.92);}
+60%{transform:rotate(270deg) scale(1.12);}
+80%{transform:rotate(330deg);}
+100%{transform:rotate(360deg);}
+}
+
+#dice.rolling{
+
+animation:diceRoll .6s ease;
+
+}
+
+/* =========================
+   按鈕
+========================= */
+
+button{
+
+width:100%;
+
+padding:16px;
+
+font-size:24px;
+
+font-weight:900;
+
+border:none;
+
+border-radius:16px;
+
+cursor:pointer;
+
+margin-top:12px;
+
+transition:.2s;
+
+color:white;
+
+background:
+
+linear-gradient(135deg,#ff6ea8,#ff4d88);
+
+box-shadow:
+
+0 8px 18px rgba(255,77,136,.35);
+
+}
+
+button:hover{
+
+transform:translateY(-2px);
+
+filter:brightness(1.05);
+
+}
+
+button:active{
+
+transform:scale(.98);
+
+}
+
+/* =========================
+   題目框
+========================= */
+
+#questionBox{
+
+min-height:170px;
+
+padding:20px;
+
+border-radius:18px;
+
+background:
+
+linear-gradient(180deg,#fffdfd,#fff5f9);
+
+border:2px solid #ffd7e8;
+
+font-size:28px;
+
+line-height:1.6;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+font-weight:700;
+
+color:#555;
+
+}
+
+/* =========================
+   計分板
+========================= */
+
+.scoreRow{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:14px 0;
+
+border-bottom:1px dashed #ffd5e5;
+
+font-size:24px;
+
+}
+
+.scoreRow:last-child{
+
+border:none;
+
+}
+
+.scoreRow span:last-child{
+
+font-weight:900;
+
+color:#ff4d88;
+
+font-size:28px;
+
+}
+
+/* =========================
+   倒數畫面
+========================= */
+
+#countdownOverlay{
+
+position:fixed;
+
+left:0;
+top:0;
+right:0;
+bottom:0;
+
+display:none;
+
+justify-content:center;
+
+align-items:center;
+
+background:
+
+rgba(255,214,235,.92);
+
+backdrop-filter:blur(10px);
+
+z-index:9999;
+
+}
+
+#countdownOverlay.show{
+
+display:flex;
+
+}
+
+#countdownNumber{
+
+font-size:220px;
+
+font-weight:900;
+
+color:white;
+
+text-shadow:
+
+0 10px 25px rgba(0,0,0,.25);
+
+animation:pulse .9s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(.8);
+
+opacity:.5;
+
+}
+
+50%{
+
+transform:scale(1.08);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(.8);
+
+opacity:.5;
+
+}
+
+}
+
+/* =========================
+   格子發光
+========================= */
+
+.space.active{
+
+box-shadow:
+
+0 0 35px rgba(255,190,50,.8),
+
+0 0 12px rgba(255,255,255,.8);
+
+transform:scale(1.12);
+
+}
+
+/* =========================
+   捲軸
+========================= */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#ff9ec6;
+
+border-radius:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:transparent;
+
+}
+
+/* =========================
+   投影模式
+========================= */
+
+@media (min-width:1700px){
+
+.titleArea h1{
+
+font-size:52px;
+
+}
+
+#currentTeam{
+
+font-size:36px;
+
+}
+
+button{
+
+font-size:28px;
+
+}
+
+#questionBox{
+
+font-size:34px;
+
+}
+
+.space{
+
+width:90px;
+
+height:90px;
+
+font-size:38px;
+
+}
+
+}
