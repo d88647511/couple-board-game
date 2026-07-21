@@ -11,43 +11,68 @@ const spaces = [
 
 { x:80 , y:340 , icon:"🏠", type:"start" },
 
-{ x:180 , y:240 , icon:"💕", type:"love" },
+{ x:135 , y:240 , icon:"💕", type:"love" },
 
-{ x:320 , y:180 , icon:"📸", type:"memory" },
+{ x:240 , y:200 , icon:"📸", type:"memory" },
 
-{ x:470 , y:220 , icon:"🎁", type:"surprise" },
+{ x:340 , y:160 , icon:"🎁", type:"surprise" },
 
-{ x:610 , y:140 , icon:"🤣", type:"fun" },
+{ x:450 , y:140 , icon:"🤣", type:"fun" },
 
-{ x:760 , y:220 , icon:"💍", type:"love" },
+{ x:560 , y:130 , icon:"💍", type:"love" },
 
-{ x:930 , y:180 , icon:"📸", type:"memory" },
+{ x:670 , y:140 , icon:"📸", type:"memory" },
 
-{ x:980 , y:340 , icon:"🎉", type:"challenge" },
+{ x:780 , y:170 , icon:"🎁", type:"surprise" },
 
-{ x:900 , y:510 , icon:"💕", type:"love" },
+{ x:890 , y:230 , icon:"💕", type:"love" },
 
-{ x:740 , y:620 , icon:"🤣", type:"fun" },
+{ x:980 , y:320 , icon:"⭐", type:"challenge" },
 
-{ x:560 , y:640 , icon:"🎁", type:"surprise" },
+{ x:1010 , y:430 , icon:"📸", type:"memory" },
 
-{ x:390 , y:610 , icon:"📸", type:"memory" },
+{ x:970 , y:540 , icon:"🤣", type:"fun" },
 
-{ x:220 , y:540 , icon:"💍", type:"love" },
+{ x:900 , y:630 , icon:"💍", type:"love" },
 
-{ x:150 , y:420 , icon:"😂", type:"fun" },
+{ x:790 , y:680 , icon:"🎁", type:"surprise" },
 
-{ x:310 , y:350 , icon:"⭐", type:"challenge" },
+{ x:670 , y:700 , icon:"📸", type:"memory" },
 
-{ x:520 , y:380 , icon:"💕", type:"love" },
+{ x:550 , y:690 , icon:"💕", type:"love" },
 
-{ x:690 , y:420 , icon:"📸", type:"memory" },
+{ x:430 , y:660 , icon:"🤣", type:"fun" },
 
-{ x:830 , y:360 , icon:"🎁", type:"surprise" },
+{ x:320 , y:620 , icon:"📸", type:"memory" },
 
-{ x:1030 , y:620 , icon:"👑", type:"goal" }
+{ x:220 , y:560 , icon:"🎁", type:"surprise" },
+
+{ x:150 , y:470 , icon:"💕", type:"love" },
+
+{ x:140 , y:360 , icon:"🤣", type:"fun" },
+
+{ x:220 , y:310 , icon:"📸", type:"memory" },
+
+{ x:320 , y:320 , icon:"💍", type:"love" },
+
+{ x:430 , y:360 , icon:"🎁", type:"surprise" },
+
+{ x:540 , y:410 , icon:"💕", type:"love" },
+
+{ x:650 , y:450 , icon:"📸", type:"memory" },
+
+{ x:760 , y:470 , icon:"🤣", type:"fun" },
+
+{ x:840 , y:430 , icon:"🎁", type:"surprise" },
+
+{ x:760 , y:360 , icon:"💕", type:"love" },
+
+{ x:630 , y:320 , icon:"⭐", type:"challenge" },
+
+{ x:520 , y:300 , icon:"👑", type:"goal" }
 
 ];
+
 
 // -------------------------------
 // 道路
@@ -72,7 +97,19 @@ const roads = [
 [14,15],
 [15,16],
 [16,17],
-[17,18]
+[17,18],
+[18,19],
+[19,20],
+[20,21],
+[21,22],
+[22,23],
+[23,24],
+[24,25],
+[25,26],
+[26,27],
+[27,28],
+[28,29],
+[29,30]
 
 ];
 
@@ -252,6 +289,17 @@ const dice=document.getElementById("dice");
 const rollBtn=document.getElementById("rollBtn");
 
 const questionBox=document.getElementById("questionBox");
+const questionOverlay=document.getElementById("questionOverlay");
+
+const overlayQuestion=document.getElementById("overlayQuestion");
+
+const startAnswerBtn=document.getElementById("startAnswerBtn");
+
+const closeQuestionBtn=document.getElementById("closeQuestionBtn");
+
+const correctBtn=document.getElementById("correctBtn");
+
+const excellentBtn=document.getElementById("excellentBtn");
 
 let moving=false;
 
@@ -366,20 +414,56 @@ moveStep(now+1,target,finish);
 // -------------------------------
 
 function showQuestion(){
+closeQuestionBtn.onclick=()=>{
 
+questionOverlay.classList.remove("show");
+
+};
+closeQuestionBtn.onclick=()=>{
+
+questionOverlay.classList.remove("show");
+
+};
+
+startAnswerBtn.onclick=()=>{
+
+startCountdown();
+
+};
+startAnswerBtn.onclick=()=>{
+
+questionOverlay.classList.remove("show");
+
+startCountdown();
+
+};
+correctBtn.onclick=()=>{
+
+addScore(currentTeam,1);
+
+questionOverlay.classList.remove("show");
+
+};
+excellentBtn.onclick=()=>{
+
+addScore(currentTeam,2);
+
+questionOverlay.classList.remove("show");
+
+};
 const q=
 
 questions[
-
 Math.floor(
-
 Math.random()*questions.length
-
 )
-
 ];
 
 questionBox.textContent=q;
+
+overlayQuestion.textContent=q;
+
+questionOverlay.classList.add("show");
 
 }
 
@@ -459,6 +543,8 @@ setTimeout(()=>{
 
 overlay.classList.remove("show");
 
+questionOverlay.classList.add("show");
+
 },1200);
 
 }
@@ -467,23 +553,7 @@ overlay.classList.remove("show");
 
 }
 
-// -------------------------------
-// 答對加一分
-// -------------------------------
 
-const scoreButton=document.createElement("button");
-
-scoreButton.textContent="✅ 答對 +1 分";
-
-scoreButton.onclick=()=>{
-
-addScore(currentTeam);
-
-};
-
-document
-.querySelector("#rightPanel .card:last-child")
-.appendChild(scoreButton);
 
 // -------------------------------
 // 是否到終點
@@ -573,9 +643,9 @@ window.innerHeight-topBar-padding;
 
 const scale=Math.min(
 
-availableWidth/1100,
+availableWidth/1350,
 
-availableHeight/760,
+availableHeight/900,
 
 1
 
