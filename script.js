@@ -9,45 +9,45 @@
 
 const spaces = [
 
-{ icon:"🎨", type:"gift",   x:100, y:100 },
-{ icon:"😂", type:"fun",    x:210, y:100 },
-{ icon:"💍", type:"love",   x:320, y:100 },
-{ icon:"📸", type:"memory", x:430, y:100 },
-{ icon:"🎁", type:"gift",   x:540, y:100 },
-{ icon:"💕", type:"love",   x:650, y:100 },
-{ icon:"⭐", type:"star",   x:760, y:100 },
+{ icon:"🎨", type:"gift",   x:80,   y:80 },
+{ icon:"😂", type:"fun",    x:280,  y:80 },
+{ icon:"💍", type:"love",   x:480,  y:80 },
+{ icon:"📸", type:"memory", x:680,  y:80 },
+{ icon:"🎁", type:"gift",   x:880,  y:80 },
+{ icon:"💕", type:"love",   x:1080, y:80 },
+{ icon:"⭐", type:"star",   x:1280, y:80 },
 
-{ icon:"😂", type:"fun",    x:760, y:220 },
+{ icon:"😂", type:"fun",    x:1280, y:260 },
 
-{ icon:"💍", type:"love",   x:650, y:220 },
-{ icon:"📸", type:"memory", x:540, y:220 },
-{ icon:"🎁", type:"gift",   x:430, y:220 },
-{ icon:"💕", type:"love",   x:320, y:220 },
-{ icon:"⭐", type:"star",   x:210, y:220 },
-{ icon:"😂", type:"fun",    x:100, y:220 },
+{ icon:"💍", type:"love",   x:1080, y:260 },
+{ icon:"📸", type:"memory", x:880,  y:260 },
+{ icon:"🎁", type:"gift",   x:680,  y:260 },
+{ icon:"💕", type:"love",   x:480,  y:260 },
+{ icon:"⭐", type:"star",   x:280,  y:260 },
+{ icon:"😂", type:"fun",    x:80,   y:260 },
 
-{ icon:"💍", type:"love",   x:100, y:340 },
+{ icon:"💍", type:"love",   x:80,   y:440 },
 
-{ icon:"📸", type:"memory", x:210, y:340 },
-{ icon:"🎁", type:"gift",   x:320, y:340 },
-{ icon:"💕", type:"love",   x:430, y:340 },
-{ icon:"⭐", type:"star",   x:540, y:340 },
-{ icon:"😂", type:"fun",    x:650, y:340 },
-{ icon:"💍", type:"love",   x:760, y:340 },
+{ icon:"📸", type:"memory", x:280,  y:440 },
+{ icon:"🎁", type:"gift",   x:480,  y:440 },
+{ icon:"💕", type:"love",   x:680,  y:440 },
+{ icon:"⭐", type:"star",   x:880,  y:440 },
+{ icon:"😂", type:"fun",    x:1080, y:440 },
+{ icon:"💍", type:"love",   x:1280, y:440 },
 
-{ icon:"📸", type:"memory", x:760, y:460 },
+{ icon:"📸", type:"memory", x:1280, y:620 },
 
-{ icon:"🎁", type:"gift",   x:650, y:460 },
-{ icon:"💕", type:"love",   x:540, y:460 },
-{ icon:"⭐", type:"star",   x:430, y:460 },
-{ icon:"😂", type:"fun",    x:320, y:460 },
-{ icon:"💍", type:"love",   x:210, y:460 },
-{ icon:"📸", type:"memory", x:100, y:460 },
+{ icon:"🎁", type:"gift",   x:1080, y:620 },
+{ icon:"💕", type:"love",   x:880,  y:620 },
+{ icon:"⭐", type:"star",   x:680,  y:620 },
+{ icon:"😂", type:"fun",    x:480,  y:620 },
+{ icon:"💍", type:"love",   x:280,  y:620 },
+{ icon:"📸", type:"memory", x:80,   y:620 },
 
-{ icon:"🎁", type:"gift",   x:100, y:580 },
-{ icon:"💕", type:"love",   x:210, y:580 },
+{ icon:"🎁", type:"gift",   x:80,   y:800 },
+{ icon:"💕", type:"love",   x:280,  y:800 },
 
-{ icon:"👑", type:"star",   x:320, y:580 }
+{ icon:"👑", type:"star",   x:480,  y:800 }
 
 ];
 
@@ -510,15 +510,15 @@ updateTurn();
 
 function addScore(index,point=1){
 
-teams[index].score+=point;
+    teams[index].score += point;
 
-document.getElementById(
+    // 原本計分板
+    document.getElementById("score"+index).textContent =
+        teams[index].score;
 
-"score"+index
-
-).textContent=
-
-teams[index].score;
+    // 隊伍設定右側分數
+    document.getElementById("teamScore"+index).textContent =
+        teams[index].score;
 
 }
 // -------------------------------
@@ -675,9 +675,9 @@ window.innerHeight-topBar-padding;
 
 const scale=Math.min(
 
-availableWidth/1350,
+availableWidth/1450,
 
-availableHeight/900,
+availableHeight/980,
 
 1
 
@@ -702,6 +702,12 @@ placePieces();
 updateNames();
 
 updateTurn();
+teams.forEach((team,index)=>{
+
+    document.getElementById("teamScore"+index).textContent =
+        team.score;
+
+});
 fitBoard();
 
 window.addEventListener("resize",fitBoard);

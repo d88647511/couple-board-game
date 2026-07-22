@@ -181,29 +181,31 @@ position:relative;
 }
 #boardContainer{
 
-position:relative;
+    position:relative;
 
-width:1100px;
+    width:1450px;
 
-height:760px;
+    height:980px;
 
-transform-origin:center center;
+    transform-origin:center center;
 
-transition:.3s;
+    transition:.3s;
 
 }
 
+
+
 #board{
 
-position:absolute;
+    position:absolute;
 
-left:0;
+    left:0;
 
-top:0;
+    top:0;
 
-width:1350px;
+    width:1450px;
 
-height:900px;
+    height:980px;
 
 }
 
@@ -213,19 +215,19 @@ height:900px;
 
 #roadLayer{
 
-position:absolute;
+    position:absolute;
 
-left:0;
+    left:0;
 
-top:0;
+    top:0;
 
-width:1350px;
+    width:1450px;
 
-height:900px;
+    height:980px;
 
-pointer-events:none;
+    pointer-events:none;
 
-z-index:1;
+    z-index:1;
 
 }
 
@@ -527,6 +529,21 @@ border:2px solid #ffd4e8;
 outline:none;
 
 transition:.2s;
+
+}
+.teamScore{
+
+    width:40px;
+
+    text-align:center;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    color:#ff4d88;
+
+    flex-shrink:0;
 
 }
 

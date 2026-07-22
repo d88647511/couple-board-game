@@ -79,12 +79,16 @@
 
 <div class="teamInput">
 
-<span class="dot red"></span>
+    <span class="dot red"></span>
 
-<input
-id="team0"
-type="text"
-value="第一隊">
+    <input
+        id="team0"
+        type="text"
+        value="第一隊">
+
+    <span class="teamScore" id="teamScore0">
+        0
+    </span>
 
 </div>
 
@@ -96,6 +100,7 @@ value="第一隊">
 id="team1"
 type="text"
 value="第二隊">
+<span class="teamScore" id="teamScore1">0</span>
 
 </div>
 
@@ -107,6 +112,7 @@ value="第二隊">
 id="team2"
 type="text"
 value="第三隊">
+<span class="teamScore" id="teamScore2">0</span>
 
 </div>
 
@@ -118,6 +124,7 @@ value="第三隊">
 id="team3"
 type="text"
 value="第四隊">
+<span class="teamScore" id="teamScore3">0</span>
 
 </div>
 
@@ -129,8 +136,10 @@ value="第四隊">
 id="team4"
 type="text"
 value="第五隊">
+<span class="teamScore" id="teamScore4">0</span>
 
 </div>
+<button id="musicBtn">🎵 播放音樂</button>
 
 </div>
 
@@ -148,7 +157,12 @@ value="第五隊">
 
 <button id="rollBtn">🎲 擲骰</button>
 
-<button id="musicBtn">🎵 播放音樂</button>
+<button id="nextBtn">
+
+➡ 下一隊
+
+</button>
+
 
 </div>
 
@@ -266,11 +280,6 @@ value="第五隊">
 
 </button>
 
-<button id="nextBtn">
-
-➡ 下一隊
-
-</button>
 
 <button id="winnerBtn">
 🏆 總分結算
