@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>骰子遙控器</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ffe6ef;
+    font-family:sans-serif;
+}
+
+button{
+    width:90%;
+    max-width:400px;
+    height:180px;
+    font-size:50px;
+    border:none;
+    border-radius:30px;
+    background:#ff4f8f;
+    color:white;
+}
+
+</style>
+
+</head>
+<body>
+
+<button id="rollBtn">
+🎲 擲骰
+</button>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBg-YvvfUNvJNDYlzyd2bA0MuWXotvz5sg",
+  authDomain: "couple-board-game.firebaseapp.com",
+  databaseURL: "https://couple-board-game-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "couple-board-game",
+  storageBucket: "couple-board-game.firebasestorage.app",
+  messagingSenderId: "133501507868",
+  appId: "1:133501507868:web:17396fe377a37fe83302d9"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+document.getElementById("rollBtn").onclick = async () => {
+
+    console.log("按鈕被按了");
+
+    await set(ref(db, "remote/roll"), true);
+
+    console.log("已寫入 true");
+
+    await set(ref(db, "remote/roll"), false);
+
+    console.log("已寫入 false");
+
+};
+
+</script>
+
+</body>
+</html>
