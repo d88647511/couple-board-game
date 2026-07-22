@@ -7,6 +7,7 @@
 // 地圖資料
 // -------------------------------
 
+
 const spaces = [
 
 { icon:"🎨", type:"gift",   x:80,   y:80 },
@@ -286,6 +287,7 @@ const correctBtn=document.getElementById("correctBtn");
 const excellentBtn=document.getElementById("excellentBtn");
 
 let moving=false;
+let history = [];
 const usedQuestions = {};
 
 function getRandomQuestion(type){
@@ -322,7 +324,15 @@ rollBtn.addEventListener("click",()=>{
 if(moving) return;
 
 updateNames();
+history.push({
 
+    currentTeam,
+
+    dice: dice.textContent,
+
+    teams: JSON.parse(JSON.stringify(teams))
+
+});
 moving=true;
 diceSound.pause();
 diceSound.currentTime = 0;
@@ -810,7 +820,64 @@ winnerSound.play().catch(()=>{});
     winnerOverlay.classList.add("show");
 
 }
+const undoBtn = document.getElementById("undoBtn");
 
+undoBtn.onclick = () => {
+
+if (history.length === 0) {
+
+    alert("已經沒有上一動了！");
+
+    return;
+
+}
+
+const state = history.pop();
+
+// 恢復目前隊伍
+currentTeam = state.currentTeam;
+
+// 恢復骰子
+dice.textContent = state.dice;
+
+    // 恢復隊伍資料
+   state.teams.forEach((team,index)=>{
+        teams[index].position = team.position;
+        teams[index].score = team.score;
+        teams[index].name = team.name;
+    });
+
+    // 更新棋子位置
+    placePieces();
+
+    // 更新目前隊伍
+    updateTurn();
+
+    // 更新計分板
+    teams.forEach((team, index) => {
+
+        document.getElementById("score" + index).textContent =
+            team.score;
+
+        const teamScore = document.getElementById("teamScore" + index);
+
+        if (teamScore) {
+            teamScore.textContent = team.score;
+        }
+
+    });
+
+    // 關閉所有視窗
+    questionOverlay.classList.remove("show");
+    overlay.classList.remove("show");
+    winnerOverlay.classList.remove("show");
+
+    // 清除格子發光
+    document.querySelectorAll(".space").forEach(cell => {
+        cell.classList.remove("active");
+    });
+
+};
 winnerBtn.onclick=showWinner;
 
 closeWinner.onclick=()=>{
