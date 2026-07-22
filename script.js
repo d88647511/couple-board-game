@@ -9,45 +9,45 @@
 
 const spaces = [
 
-{ icon:"🎨", x:100, y:100 },
-{ icon:"😂", x:210, y:100 },
-{ icon:"💍", x:320, y:100 },
-{ icon:"📸", x:430, y:100 },
-{ icon:"🎁", x:540, y:100 },
-{ icon:"💕", x:650, y:100 },
-{ icon:"⭐", x:760, y:100 },
+{ icon:"🎨", type:"gift",   x:100, y:100 },
+{ icon:"😂", type:"fun",    x:210, y:100 },
+{ icon:"💍", type:"love",   x:320, y:100 },
+{ icon:"📸", type:"memory", x:430, y:100 },
+{ icon:"🎁", type:"gift",   x:540, y:100 },
+{ icon:"💕", type:"love",   x:650, y:100 },
+{ icon:"⭐", type:"star",   x:760, y:100 },
 
-{ icon:"😂", x:760, y:220 },
+{ icon:"😂", type:"fun",    x:760, y:220 },
 
-{ icon:"💍", x:650, y:220 },
-{ icon:"📸", x:540, y:220 },
-{ icon:"🎁", x:430, y:220 },
-{ icon:"💕", x:320, y:220 },
-{ icon:"⭐", x:210, y:220 },
-{ icon:"😂", x:100, y:220 },
+{ icon:"💍", type:"love",   x:650, y:220 },
+{ icon:"📸", type:"memory", x:540, y:220 },
+{ icon:"🎁", type:"gift",   x:430, y:220 },
+{ icon:"💕", type:"love",   x:320, y:220 },
+{ icon:"⭐", type:"star",   x:210, y:220 },
+{ icon:"😂", type:"fun",    x:100, y:220 },
 
-{ icon:"💍", x:100, y:340 },
+{ icon:"💍", type:"love",   x:100, y:340 },
 
-{ icon:"📸", x:210, y:340 },
-{ icon:"🎁", x:320, y:340 },
-{ icon:"💕", x:430, y:340 },
-{ icon:"⭐", x:540, y:340 },
-{ icon:"😂", x:650, y:340 },
-{ icon:"💍", x:760, y:340 },
+{ icon:"📸", type:"memory", x:210, y:340 },
+{ icon:"🎁", type:"gift",   x:320, y:340 },
+{ icon:"💕", type:"love",   x:430, y:340 },
+{ icon:"⭐", type:"star",   x:540, y:340 },
+{ icon:"😂", type:"fun",    x:650, y:340 },
+{ icon:"💍", type:"love",   x:760, y:340 },
 
-{ icon:"📸", x:760, y:460 },
+{ icon:"📸", type:"memory", x:760, y:460 },
 
-{ icon:"🎁", x:650, y:460 },
-{ icon:"💕", x:540, y:460 },
-{ icon:"⭐", x:430, y:460 },
-{ icon:"😂", x:320, y:460 },
-{ icon:"💍", x:210, y:460 },
-{ icon:"📸", x:100, y:460 },
+{ icon:"🎁", type:"gift",   x:650, y:460 },
+{ icon:"💕", type:"love",   x:540, y:460 },
+{ icon:"⭐", type:"star",   x:430, y:460 },
+{ icon:"😂", type:"fun",    x:320, y:460 },
+{ icon:"💍", type:"love",   x:210, y:460 },
+{ icon:"📸", type:"memory", x:100, y:460 },
 
-{ icon:"🎁", x:100, y:580 },
-{ icon:"💕", x:210, y:580 },
+{ icon:"🎁", type:"gift",   x:100, y:580 },
+{ icon:"💕", type:"love",   x:210, y:580 },
 
-{ icon:"👑", x:320, y:580 }
+{ icon:"👑", type:"star",   x:320, y:580 }
 
 ];
 
@@ -243,20 +243,7 @@ teams[currentTeam].name;
 // 題庫（之後會改成 questions.json）
 // -------------------------------
 
-const questions=[
 
-"第一次見面是誰先主動？",
-"第一次約會去哪裡？",
-"另一半最愛吃什麼？",
-"第一次牽手在哪裡？",
-"另一半最大的優點？",
-"如果中樂透第一件事？",
-"最想一起去哪個國家？",
-"誰比較容易生氣？",
-"第一次旅行去哪裡？",
-"對方最喜歡的飲料？"
-
-];
 
 // -------------------------------
 // 骰子
@@ -270,7 +257,7 @@ let resumeBgm = false;
 const heartSound = new Audio("heart.mp3");
 const endSound = new Audio("end.mp3");
 
-endSound.volume = 1;
+endSound.volume = 1.0;
 
 heartSound.loop = true;
 heartSound.volume = 0.8;
@@ -278,6 +265,10 @@ heartSound.volume = 0.8;
 const diceSound = new Audio("dice.mp3");
 
 diceSound.volume = 0.8;
+
+const winnerSound = new Audio("winner.mp3");
+
+winnerSound.volume = 1.0;
 
 const musicBtn=document.getElementById("musicBtn");
 
@@ -295,6 +286,32 @@ const correctBtn=document.getElementById("correctBtn");
 const excellentBtn=document.getElementById("excellentBtn");
 
 let moving=false;
+const usedQuestions = {};
+
+function getRandomQuestion(type){
+
+    if(!usedQuestions[type]){
+        usedQuestions[type] = [];
+    }
+
+    const allQuestions = questions[type];
+
+    if(usedQuestions[type].length >= allQuestions.length){
+        usedQuestions[type] = [];
+    }
+
+    const available = allQuestions.filter(
+        q => !usedQuestions[type].includes(q)
+    );
+
+    const q = available[
+        Math.floor(Math.random()*available.length)
+    ];
+
+    usedQuestions[type].push(q);
+
+    return q;
+}
 
 // -------------------------------
 // 擲骰
@@ -358,6 +375,8 @@ moveStep(team.position,target,()=>{
 
 team.position=target;
 
+
+
 showQuestion();
 
 placePieces();
@@ -389,6 +408,7 @@ const next=spaces[now+1];
 piece.style.left=(next.x+26+(currentTeam%2)*10)+"px";
 
 piece.style.top=(next.y+26+Math.floor(currentTeam/2)*10)+"px";
+highlightCell(now + 1);
 
 piece.classList.remove("jump");
 
@@ -446,13 +466,13 @@ addScore(currentTeam,2);
 questionOverlay.classList.remove("show");
 
 };
-const q=
+const allQuestions = Object.values(questions).flat();
 
-questions[
-Math.floor(
-Math.random()*questions.length
-)
-];
+const team = teams[currentTeam];
+
+const currentSpace = spaces[team.position];
+
+const q = getRandomQuestion(currentSpace.type);
 
 questionBox.textContent=q;
 
@@ -738,3 +758,62 @@ console.log(e);
 }
 
 });
+
+function highlightCell(index){
+
+    document.querySelectorAll(".space").forEach(cell=>{
+        cell.classList.remove("active");
+    });
+
+    document
+        .querySelector(`.space[data-index="${index}"]`)
+        ?.classList.add("active");
+}
+const winnerBtn=document.getElementById("winnerBtn");
+
+const winnerOverlay=document.getElementById("winnerOverlay");
+
+const winnerName=document.getElementById("winnerName");
+
+const winnerScore=document.getElementById("winnerScore");
+
+const closeWinner=document.getElementById("closeWinner");
+
+function showWinner(){
+
+    let winner=teams[0];
+
+    teams.forEach(team=>{
+
+        if(team.score>winner.score){
+
+            winner=team;
+
+        }
+
+    });
+
+    winnerName.textContent="🥇 "+winner.name;
+
+    winnerScore.textContent=
+    "總分："+winner.score+" 分";
+    bgm.pause();
+winnerSound.pause();
+winnerSound.currentTime = 0;
+winnerSound.play().catch(()=>{});
+    winnerOverlay.classList.add("show");
+
+}
+
+winnerBtn.onclick=showWinner;
+
+closeWinner.onclick=()=>{
+
+    winnerOverlay.classList.remove("show");
+
+    if(musicPlaying){
+        bgm.play().catch(()=>{});
+    }
+
+};
+

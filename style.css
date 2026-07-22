@@ -357,81 +357,86 @@ z-index:10;
 
 .piece{
 
-position:absolute;
+    position:absolute;
 
-width:28px;
+    width:34px;
+    height:34px;
 
-height:28px;
+    border-radius:50%;
+    box-sizing:border-box;
 
-border-radius:50%;
+    border:3px solid rgba(255,255,255,.9);
 
-border:3px solid white;
+    box-shadow:
+        0 8px 16px rgba(0,0,0,.25),
+        inset 0 4px 8px rgba(255,255,255,.8),
+        inset 0 -5px 8px rgba(0,0,0,.15);
 
-box-shadow:
+    transition:
+        left .45s linear,
+        top .45s linear,
+        transform .25s;
 
-0 5px 10px rgba(0,0,0,.3);
-
-transition:
-
-left .45s linear,
-top .45s linear;
+    z-index:100;
 
 }
+.piece::before{
 
+    content:"";
+
+    position:absolute;
+
+    left:5px;
+    top:4px;
+
+    width:16px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.9);
+
+    filter:blur(1px);
+
+    transform:rotate(-20deg);
+
+}
 .red{
-
-background:#ff4d4f;
-
+    background:linear-gradient(145deg,#ffb3b3,#ff4d4f,#b30021);
 }
 
 .blue{
-
-background:#2f80ed;
-
+    background:linear-gradient(145deg,#b8ddff,#2f80ed,#0b4fb3);
 }
 
 .green{
-
-background:#2ecc71;
-
+    background:linear-gradient(145deg,#bff6d4,#2ecc71,#118a46);
 }
 
 .yellow{
-
-background:#ffd43b;
-
+    background:linear-gradient(145deg,#fff6b3,#ffd43b,#e0a800);
 }
 
 .purple{
-
-background:#9b59b6;
-
+    background:linear-gradient(145deg,#e8c9ff,#9b59b6,#6f2d91);
 }
 
 @keyframes bounce{
 
 0%{
-
-transform:translateY(0);
-
+    transform:translateY(0) scale(1);
 }
 
 35%{
-
-transform:translateY(-18px);
-
+    transform:translateY(-18px) scale(1.08);
 }
 
 70%{
-
-transform:translateY(0);
-
+    transform:translateY(-6px) scale(1.03);
 }
 
 100%{
-
-transform:translateY(-4px);
-
+    transform:translateY(0) scale(1);
 }
 
 }
@@ -1029,5 +1034,66 @@ transform:scale(1.03);
 #musicBtn:active{
 
 transform:scale(.97);
+
+}
+.space.active{
+    transform: scale(1.18);
+    box-shadow: 0 0 25px gold;
+    border:4px solid #ffd700;
+    transition:all .25s;
+}
+#winnerOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.92);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    z-index:99999;
+
+}
+
+#winnerOverlay.show{
+
+    display:flex;
+
+}
+
+#winnerTitle{
+
+    font-size:64px;
+
+    color:#FFD700;
+
+    margin-bottom:40px;
+
+}
+
+#winnerName{
+
+    font-size:80px;
+
+    color:white;
+
+    font-weight:900;
+
+}
+
+#winnerScore{
+
+    margin-top:20px;
+
+    font-size:48px;
+
+    color:#ffd43b;
 
 }
