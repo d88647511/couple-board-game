@@ -9,67 +9,45 @@
 
 const spaces = [
 
-{ x:80 , y:340 , icon:"🏠", type:"start" },
+{ icon:"🎨", x:100, y:100 },
+{ icon:"😂", x:210, y:100 },
+{ icon:"💍", x:320, y:100 },
+{ icon:"📸", x:430, y:100 },
+{ icon:"🎁", x:540, y:100 },
+{ icon:"💕", x:650, y:100 },
+{ icon:"⭐", x:760, y:100 },
 
-{ x:135 , y:240 , icon:"💕", type:"love" },
+{ icon:"😂", x:760, y:220 },
 
-{ x:240 , y:200 , icon:"📸", type:"memory" },
+{ icon:"💍", x:650, y:220 },
+{ icon:"📸", x:540, y:220 },
+{ icon:"🎁", x:430, y:220 },
+{ icon:"💕", x:320, y:220 },
+{ icon:"⭐", x:210, y:220 },
+{ icon:"😂", x:100, y:220 },
 
-{ x:340 , y:160 , icon:"🎁", type:"surprise" },
+{ icon:"💍", x:100, y:340 },
 
-{ x:450 , y:140 , icon:"🤣", type:"fun" },
+{ icon:"📸", x:210, y:340 },
+{ icon:"🎁", x:320, y:340 },
+{ icon:"💕", x:430, y:340 },
+{ icon:"⭐", x:540, y:340 },
+{ icon:"😂", x:650, y:340 },
+{ icon:"💍", x:760, y:340 },
 
-{ x:560 , y:130 , icon:"💍", type:"love" },
+{ icon:"📸", x:760, y:460 },
 
-{ x:670 , y:140 , icon:"📸", type:"memory" },
+{ icon:"🎁", x:650, y:460 },
+{ icon:"💕", x:540, y:460 },
+{ icon:"⭐", x:430, y:460 },
+{ icon:"😂", x:320, y:460 },
+{ icon:"💍", x:210, y:460 },
+{ icon:"📸", x:100, y:460 },
 
-{ x:780 , y:170 , icon:"🎁", type:"surprise" },
+{ icon:"🎁", x:100, y:580 },
+{ icon:"💕", x:210, y:580 },
 
-{ x:890 , y:230 , icon:"💕", type:"love" },
-
-{ x:980 , y:320 , icon:"⭐", type:"challenge" },
-
-{ x:1010 , y:430 , icon:"📸", type:"memory" },
-
-{ x:970 , y:540 , icon:"🤣", type:"fun" },
-
-{ x:900 , y:630 , icon:"💍", type:"love" },
-
-{ x:790 , y:680 , icon:"🎁", type:"surprise" },
-
-{ x:670 , y:700 , icon:"📸", type:"memory" },
-
-{ x:550 , y:690 , icon:"💕", type:"love" },
-
-{ x:430 , y:660 , icon:"🤣", type:"fun" },
-
-{ x:320 , y:620 , icon:"📸", type:"memory" },
-
-{ x:220 , y:560 , icon:"🎁", type:"surprise" },
-
-{ x:150 , y:470 , icon:"💕", type:"love" },
-
-{ x:140 , y:360 , icon:"🤣", type:"fun" },
-
-{ x:220 , y:310 , icon:"📸", type:"memory" },
-
-{ x:320 , y:320 , icon:"💍", type:"love" },
-
-{ x:430 , y:360 , icon:"🎁", type:"surprise" },
-
-{ x:540 , y:410 , icon:"💕", type:"love" },
-
-{ x:650 , y:450 , icon:"📸", type:"memory" },
-
-{ x:760 , y:470 , icon:"🤣", type:"fun" },
-
-{ x:840 , y:430 , icon:"🎁", type:"surprise" },
-
-{ x:760 , y:360 , icon:"💕", type:"love" },
-
-{ x:630 , y:320 , icon:"⭐", type:"challenge" },
-
-{ x:520 , y:300 , icon:"👑", type:"goal" }
+{ icon:"👑", x:320, y:580 }
 
 ];
 
@@ -287,6 +265,21 @@ const questions=[
 const dice=document.getElementById("dice");
 
 const rollBtn=document.getElementById("rollBtn");
+const bgm=document.getElementById("bgm");
+let resumeBgm = false;
+const heartSound = new Audio("heart.mp3");
+const endSound = new Audio("end.mp3");
+
+endSound.volume = 1;
+
+heartSound.loop = true;
+heartSound.volume = 0.8;
+
+const diceSound = new Audio("dice.mp3");
+
+diceSound.volume = 0.8;
+
+const musicBtn=document.getElementById("musicBtn");
 
 const questionBox=document.getElementById("questionBox");
 const questionOverlay=document.getElementById("questionOverlay");
@@ -314,7 +307,9 @@ if(moving) return;
 updateNames();
 
 moving=true;
-
+diceSound.pause();
+diceSound.currentTime = 0;
+diceSound.play();
 dice.classList.add("rolling");
 
 let value=1;
@@ -518,7 +513,14 @@ document
 .addEventListener("click",startCountdown);
 
 function startCountdown(){
+    resumeBgm = !bgm.paused;
 
+if (resumeBgm) {
+    bgm.pause();
+}
+heartSound.pause();
+heartSound.currentTime = 0;
+heartSound.play().catch(() => {});
 let time=10;
 
 overlay.classList.add("show");
@@ -536,7 +538,17 @@ countdownNumber.textContent=time;
 }else{
 
 clearInterval(timer);
+heartSound.pause();
+heartSound.currentTime = 0;
+endSound.currentTime = 0;
 
+endSound.onended = () => {
+    if (resumeBgm) {
+        bgm.play().catch(() => {});
+    }
+};
+
+endSound.play().catch(() => {});
 countdownNumber.textContent="時間到！";
 
 setTimeout(()=>{
@@ -689,3 +701,40 @@ console.log(
 console.log(
 "Board Ready."
 );
+// -------------------------------
+// 背景音樂
+// -------------------------------
+
+bgm.volume=0.35;
+
+let musicPlaying=false;
+
+musicBtn.addEventListener("click",async()=>{
+
+try{
+
+if(!musicPlaying){
+
+await bgm.play();
+
+musicPlaying=true;
+
+musicBtn.textContent="⏸ 暫停音樂";
+
+}else{
+
+bgm.pause();
+
+musicPlaying=false;
+
+musicBtn.textContent="🎵 播放音樂";
+
+}
+
+}catch(e){
+
+console.log(e);
+
+}
+
+});
