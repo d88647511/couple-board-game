@@ -15,6 +15,21 @@ const db = getDatabase(app);
 
 const applauseSound = new Audio("Applause.mp3");
 
+function playConfetti() {
+
+    const myConfetti = confetti.create(null, {
+        resize: true,
+        useWorker: true
+    });
+
+    myConfetti({
+        particleCount: 180,
+        spread: 120,
+        origin: { y: 0.6 },
+        zIndex: 99999
+    });
+
+}
 console.log("✅ Firebase Ready");
 // 監聽手機是否要求擲骰
 onValue(ref(db, "remote/roll"), (snapshot) => {
@@ -97,6 +112,8 @@ onValue(ref(db, "host/cheer"), (snapshot) => {
 
         applauseSound.currentTime = 0;
         applauseSound.play();
+
+        playConfetti();
 
     }
 
