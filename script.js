@@ -13,6 +13,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+const applauseSound = new Audio("Applause.mp3");
+
 console.log("✅ Firebase Ready");
 // 監聽手機是否要求擲骰
 onValue(ref(db, "remote/roll"), (snapshot) => {
@@ -85,6 +87,16 @@ onValue(ref(db, "host/winner"), (snapshot) => {
     if (snapshot.val() === true) {
 
         document.getElementById("winnerBtn").click();
+
+    }
+
+});
+onValue(ref(db, "host/cheer"), (snapshot) => {
+
+    if (snapshot.val() === true) {
+
+        applauseSound.currentTime = 0;
+        applauseSound.play();
 
     }
 

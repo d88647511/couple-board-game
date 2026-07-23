@@ -46,6 +46,7 @@ button{
 <button id="nextBtn">➡ 下一隊</button>
 
 <button id="undoBtn">↩ 上一步</button>
+<button id="cheerBtn">🎉 歡呼</button>
 
 <button id="winnerBtn">🏆 總分結算</button>
 <script type="module">
@@ -79,7 +80,7 @@ document.getElementById("closeBtn").onclick = () => sendCommand("close");
 document.getElementById("nextBtn").onclick = () => sendCommand("next");
 document.getElementById("undoBtn").onclick = () => sendCommand("undo");
 document.getElementById("winnerBtn").onclick = () => sendCommand("winner");
-
+document.getElementById("cheerBtn").onclick = () => sendCommand("cheer");
 </script>
 </body>
 </html>
