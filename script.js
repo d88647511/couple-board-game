@@ -26,6 +26,69 @@ onValue(ref(db, "remote/roll"), (snapshot) => {
     }
 
 });
+onValue(ref(db, "host/start"), (snapshot) => {
+
+    if (snapshot.val() === true) {
+
+        document.getElementById("startAnswerBtn").click();
+
+    }
+
+});
+onValue(ref(db, "host/score1"), (snapshot) => {
+
+    if (snapshot.val() === true) {
+
+        document.getElementById("correctBtn").click();
+
+    }
+
+});
+onValue(ref(db, "host/score2"), (snapshot) => {
+
+    if (snapshot.val() === true) {
+
+        document.getElementById("excellentBtn").click();
+
+    }
+
+});
+onValue(ref(db, "host/close"), (snapshot) => {
+
+    if (snapshot.val() === true) {
+
+        document.getElementById("closeQuestionBtn").click();
+
+    }
+
+});
+onValue(ref(db, "host/next"), (snapshot) => {
+
+    if (snapshot.val() === true) {
+
+        document.getElementById("nextBtn").click();
+
+    }
+
+});
+onValue(ref(db, "host/undo"), (snapshot) => {
+
+    if (snapshot.val() === true) {
+
+        document.getElementById("undoBtn").click();
+
+    }
+
+});
+onValue(ref(db, "host/winner"), (snapshot) => {
+
+    if (snapshot.val() === true) {
+
+        document.getElementById("winnerBtn").click();
+
+    }
+
+});
 // ===============================
 // 夫妻人生旅程 Wedding Edition
 // script.js (Part 1)

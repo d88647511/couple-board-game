@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>主持人控制台</title>
+
+<style>
+body{
+    margin:0;
+    padding:20px;
+    background:#222;
+    font-family:sans-serif;
+}
+
+h1{
+    color:white;
+    text-align:center;
+}
+
+button{
+    width:100%;
+    font-size:28px;
+    padding:18px;
+    margin:10px 0;
+    border:none;
+    border-radius:12px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🎤 主持人控制台</h1>
+
+<button id="startBtn">⏱ 開始作答</button>
+
+<button id="score1Btn">✅ +1 分</button>
+
+<button id="score2Btn">🌟 +2 分</button>
+
+<button id="closeBtn">❌ 關閉題目</button>
+
+<button id="nextBtn">➡ 下一隊</button>
+
+<button id="undoBtn">↩ 上一步</button>
+
+<button id="winnerBtn">🏆 總分結算</button>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBg-YvvfUNvJNDYlzyd2bA0MuWXotvz5sg",
+  authDomain: "couple-board-game.firebaseapp.com",
+  databaseURL: "https://couple-board-game-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "couple-board-game",
+  storageBucket: "couple-board-game.firebasestorage.app",
+  messagingSenderId: "133501507868",
+  appId: "1:133501507868:web:17396fe377a37fe83302d9"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+console.log("✅ Host Ready");
+async function sendCommand(command) {
+    await set(ref(db, "host/" + command), true);
+    await set(ref(db, "host/" + command), false);
+}
+
+document.getElementById("startBtn").onclick = () => sendCommand("start");
+document.getElementById("score1Btn").onclick = () => sendCommand("score1");
+document.getElementById("score2Btn").onclick = () => sendCommand("score2");
+document.getElementById("closeBtn").onclick = () => sendCommand("close");
+document.getElementById("nextBtn").onclick = () => sendCommand("next");
+document.getElementById("undoBtn").onclick = () => sendCommand("undo");
+document.getElementById("winnerBtn").onclick = () => sendCommand("winner");
+
+</script>
+</body>
+</html>
